@@ -3,6 +3,7 @@
   {{ partial "docs/languages" . }}
 {{ end }}
 
+
 {{ if and .GitInfo .Site.Params.BookRepo }}
   <div>
     {{- $date := partial "docs/date" (dict "Date" .GitInfo.AuthorDate.Local "Format" .Site.Params.BookDateFormat) -}}
@@ -20,5 +21,5 @@
       <span>{{ i18n "Edit this page" }}</span>
     </a>
   </div>
-{{ end }}
+  {{ end }}
 </div>

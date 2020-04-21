@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+
+    <head>
+        {{ partial "docs/html-head" . }}
+        {{ partial "docs/inject/head" . }}
+        <style>
+         #book-search-results {
+             list-style: none;
+         }
+
+         #book-search-results li {
+             margin-top: 10px;
+         }
+         h1 {
+             text-align: center;
+         }
+         #raccoon {
+             width: 64px;
+             display: block;
+             margin: auto;
+         }
+         #metainfo {
+             text-align: center;
+         }
+         #rootinfo ul{
+             column-count: 3;
+             list-style: none;
+
+         }
+         #rootinfo #backlinks{
+             display: none;
+         }
+        </style>
+    </head>
+
+    <body>
+        <main class="container flex">
+
+            <div class="book-page">
+                <img src="{{ "svg/raccoon.svg" | relURL }}" alt="raccoon" id="raccoon" />
+                <h1>
+                    Peixian's Notes
+                </h1>
+                <div id="index-search">
+                    {{ partial "docs/search" . }}
+                </div>
+
+                <div id="metainfo">
+                    {{$wordcount := 0}}
+                    {{$pages := .Site.Pages}}
+                    {{range $pages}}
+                    {{$wordcount = add .WordCount $wordcount}}
+                    {{end}}
+
+                    Found {{ len (where .Site.Pages "Section" "posts") }} notes with {{$wordcount}} words.
+                </div>
+                <div id="rootinfo">
+                    <h3>Root Tags</h3>
+                    {{with .Site.GetPage "posts/root.md"}}{{.Content}}{{end}}
+                </div>
+                <footer class="book-footer">
+                    {{ template "footer" . }} <!-- Footer under page content -->
+                    {{ partial "docs/inject/footer" . }}
+                </footer>
+
+            </div>
+
+        </main>
+    </body>
+
+
+</html>
+
+{{ define "menu" }}
+{{ partial "docs/menu" . }}
+{{ end }}
+
+{{ define "header" }}
+{{ partial "docs/header" . }}
+
+{{ if default true (default .Site.Params.BookToC .Params.BookToC) }}
+<input type="checkbox" class="hidden" id="toc-control" />
+<aside class="hidden clearfix">
+    {{ template "toc" . }}
+</aside>
+{{ end }}
+{{ end }}
+
+{{ define "footer" }}
+{{ partial "docs/footer" . }}
+{{ end }}
+
+{{ define "comments" }}
+{{ if and .Content (default true (default .Site.Params.BookComments .Params.BookComments)) }}
+<div class="book-comments">
+    {{- partial "docs/comments" . -}}
+</div>
+{{ end }}
+{{ end }}
+
+{{ define "main" }}
+<article class="markdown">
+    {{- .Content -}}
+</article>
+{{ end }}
+
+{{ define "toc" }}
+{{ partial "docs/toc" . }}
+{{ end }}

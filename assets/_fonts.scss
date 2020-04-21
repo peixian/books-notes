@@ -40,10 +40,20 @@
        url('fonts/roboto-mono-v6-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+@font-face {
+    font-family: 'charterregular';
+    src: url('webfonts/charter_regular-webfont.eot');
+    src: url('webfonts/charter_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('webfonts/charter_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }
 
 code {
-  font-family: 'Roboto Mono', monospace;
+  font-family: Monaco, monospace;
 }
