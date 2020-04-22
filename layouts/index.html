@@ -16,7 +16,7 @@
              text-align: center;
          }
          #raccoon {
-             width: 64px;
+             width: 200px;
              display: block;
              margin: auto;
          }
@@ -25,7 +25,7 @@
          }
          #rootinfo ul{
              column-count: 3;
-             list-style: simp-chinese-informal;
+             list-style: none;
              line-height: 1.5em;
          }
          #rootinfo h3 {
@@ -41,9 +41,9 @@
         <main class="container flex">
 
             <div class="book-page">
-                <img src="{{ "svg/raccoon.svg" | relURL }}" alt="raccoon" id="raccoon" />
+                <img src="{{ "svg/icon.svg" | relURL }}" alt="icon" id="raccoon" />
                 <h1>
-                    Peixian's Notes
+                    {{ .Site.Title }}
                 </h1>
                 <div id="index-search">
                     {{ partial "docs/search" . }}
@@ -59,7 +59,6 @@
                     Found {{ len (where .Site.Pages "Section" "posts") }} notes with {{$wordcount | lang.NumFmt 0}} words.
                 </div>
                 <div id="rootinfo">
-                    <h3>Root Tags</h3>
                     {{with .Site.GetPage "posts/root.md"}}{{.Content}}{{end}}
                 </div>
                 <footer class="book-footer">
