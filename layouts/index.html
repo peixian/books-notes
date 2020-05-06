@@ -14,6 +14,7 @@
          }
          h1 {
              text-align: center;
+             font-size: 3em;
          }
          #raccoon {
              width: 200px;
@@ -57,6 +58,8 @@
                     {{end}}
 
                     Found {{ len (where .Site.Pages "Section" "posts") }} notes with {{$wordcount | lang.NumFmt 0}} words.
+
+                    <h4><a href="/notes-map.svg">Notes Map</a></h4>
                 </div>
                 <div id="rootinfo">
                     {{with .Site.GetPage "posts/root.md"}}{{.Content}}{{end}}
